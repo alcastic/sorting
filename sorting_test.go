@@ -1,8 +1,20 @@
 package sorting
 
-import "testing"
+import (
+	"reflect"
+	"runtime"
+	"testing"
+)
 
-func TestSelectSort(t *testing.T) {
+func TestSelectionSort(t *testing.T) {
+	testSortingAlgorithm(t, SelectSort)
+}
+
+func TestBubbleSort(t *testing.T) {
+	testSortingAlgorithm(t, BubbleSort)
+}
+
+func testSortingAlgorithm(t *testing.T, sa func(s []int) []int) {
 	tests := []struct {
 		input    []int
 		expected []int
@@ -26,9 +38,15 @@ func TestSelectSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := SelectSort(test.input)
+		input := make([]int, len(test.input))
+		copy(input, test.input)
+		result := sa(test.input)
 		if !isEqual(result, test.expected) {
-			t.Errorf("Select(%v) = %v, wants = %v", test.input, result, test.expected)
+			t.Errorf("%s(%v) = %v, wants = %v",
+				runtime.FuncForPC(reflect.ValueOf(sa).Pointer()).Name(),
+				input,
+				result,
+				test.expected)
 		}
 	}
 }
