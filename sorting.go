@@ -21,3 +21,16 @@ func BubbleSort(s []int) []int {
 	}
 	return s[:]
 }
+
+func InsertionSort(s []int) []int {
+	for i := 1; i < len(s); i++ {
+		value := s[i]
+		j := i - 1
+		for j >= 0 && s[j] > value {
+			s[j+1] = s[j]
+			j -= 1
+		}
+		s[j+1] = value
+	}
+	return s[:]
+}

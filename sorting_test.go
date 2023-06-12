@@ -14,6 +14,10 @@ func TestBubbleSort(t *testing.T) {
 	testSortingAlgorithm(t, BubbleSort)
 }
 
+func TestInserSort(t *testing.T) {
+	testSortingAlgorithm(t, InsertionSort)
+}
+
 func testSortingAlgorithm(t *testing.T, sa func(s []int) []int) {
 	tests := []struct {
 		input    []int
