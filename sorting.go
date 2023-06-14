@@ -34,3 +34,36 @@ func InsertionSort(s []int) []int {
 	}
 	return s[:]
 }
+
+func MergeSort(s []int) []int {
+	if len(s) > 2 {
+		return s[:]
+	}
+
+	s1 := MergeSort(s[:(len(s)/2)+1])
+	s2 := MergeSort(s[(len(s)/2)+1:])
+
+	i, j, k := 0, 0, 0
+	r := make([]int, len(s1)+len(s2))
+
+	for i < len(s1) && j < len(s2) {
+		if s1[i] < s2[j] {
+			r[k] = s1[i]
+		} else {
+			r[k] = s2[j]
+		}
+		k++
+	}
+	for i < len(s1) {
+		r[k] = s1[i]
+		i++
+		k++
+	}
+	for j < len(s2) {
+		r[k] = s2[j]
+		j++
+		k++
+	}
+
+	return r
+}
