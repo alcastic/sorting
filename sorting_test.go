@@ -26,6 +26,12 @@ func TestQuickSort(t *testing.T) {
 	testSortingAlgorithm(t, QuickSort)
 }
 
+/*
+func TestHeapSort(t *testing.T) {
+	testSortingAlgorithm(t, HeapSort)
+}
+*/
+
 func testSortingAlgorithm(t *testing.T, sa func(s []int) []int) {
 	tests := []struct {
 		input    []int

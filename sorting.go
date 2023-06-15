@@ -89,3 +89,34 @@ func QuickSort(s []int) []int {
 	greater = QuickSort(greater)
 	return append(lower, append([]int{pivot}, greater...)...)
 }
+
+func maxHeapify(s []int, i int) {
+	largest := i
+	left, right := 2*i+1, 2*i+2
+	if left < len(s) && s[left] > s[largest] {
+		largest = left
+	}
+	if right < len(s) && s[right] > s[largest] {
+		largest = right
+	}
+	if largest != i {
+		s[i], s[largest] = s[largest], s[i]
+		maxHeapify(s, largest)
+	}
+}
+
+func HeapSort(s []int) []int {
+	heap := make([]int, len(s))
+	copy(heap, s)
+	for i := (len(heap) / 2) - 1; i >= 0; i-- {
+		maxHeapify(heap, i)
+	}
+
+	result := heap[:]
+	for i := len(heap) - 1; i > 0; i-- {
+		heap[i], heap[0] = heap[0], result[i]
+		heap = heap[:len(heap)-1]
+		maxHeapify(heap, 0)
+	}
+	return result
+}
