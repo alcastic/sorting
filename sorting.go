@@ -67,3 +67,25 @@ func MergeSort(s []int) []int {
 	s2 := MergeSort(s[(len(s)/2)+1:])
 	return merge(s1, s2)
 }
+
+func partition(s []int) (pivot int, lower []int, greater []int) {
+	pivot = s[0]
+	for _, v := range s[1:] {
+		if v < pivot {
+			lower = append(lower, v)
+		} else {
+			greater = append(greater, v)
+		}
+	}
+	return pivot, lower, greater
+}
+
+func QuickSort(s []int) []int {
+	if len(s) < 2 {
+		return s[:]
+	}
+	pivot, lower, greater := partition(s)
+	lower = QuickSort(lower)
+	greater = QuickSort(greater)
+	return append(lower, append([]int{pivot}, greater...)...)
+}
